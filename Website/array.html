@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Array Operations</title>
+<style>
+  body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+  }
+
+  h1, h2 {
+    color: #333;
+  }
+
+  .array {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 30px;
+  }
+  .node {
+    border: 2px solid #fff;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.5s ease;
+    background-color: #ffcc00;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  #arraySize {
+    margin-top: 20px;
+    color: #666;
+  }
+  #description {
+    margin-top: 30px;
+    color: #666;
+  }
+  #videoContainer {
+    margin-top: 30px;
+  }
+  .quiz {
+    margin-top: 30px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Array Operations</h1>
+
+<h2>Description:</h2>
+<p id="description">An array is a data structure that holds a fixed-size collection of elements of the same type. Elements are accessed by their index, and they're stored sequentially in memory. Arrays are efficient for random access but have a fixed size and hold homogeneous elements. They're commonly used in programming for storing and manipulating collections of data.</p>
+
+<div class="array">
+  <div class="node" id="node1">1</div>
+  <div class="node" id="node2">2</div>
+  <div class="node" id="node3">3</div>
+</div>
+
+<div id="arraySize">Size: 3</div>
+
+<button onclick="addElement()">Add Element</button>
+<button onclick="removeElement()">Remove Element</button>
+<button onclick="clearArray()">Clear</button>
+
+<h2>YouTube Video:</h2>
+<div id="videoContainer">
+  <!-- Embed YouTube video here -->
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/Ri9ljAqm-is?si=aZ5PfBI-EE0EJBn8" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<section class="quiz">
+  <h2>Quiz</h2>
+  <form id="quizForm">
+    <p>1. Which operation adds an element to the array?</p>
+    <label><input type="radio" name="q1" value="a"> Add</label><br>
+    <label><input type="radio" name="q1" value="b"> Insert</label><br>
+    <label><input type="radio" name="q1" value="c"> Push</label><br>
+    
+    <p>2. What operation removes the last element from the array?</p>
+    <label><input type="radio" name="q2" value="a"> Remove</label><br>
+    <label><input type="radio" name="q2" value="b"> Pop</label><br>
+    <label><input type="radio" name="q2" value="c"> Delete</label><br>
+    
+    <p>3. Which operation clears all elements from the array?</p>
+    <label><input type="radio" name="q3" value="a"> Empty</label><br>
+    <label><input type="radio" name="q3" value="b"> Clear</label><br>
+    <label><input type="radio" name="q3" value="c"> Flush</label><br>
+    
+    <p>4. How do you access the last element of an array in JavaScript?</p>
+    <label><input type="radio" name="q4" value="a"> array.last()</label><br>
+    <label><input type="radio" name="q4" value="b"> array[-1]</label><br>
+    <label><input type="radio" name="q4" value="c"> array[array.length - 1]</label><br>
+    
+    <p>5. What is the time complexity of removing an element from the end of an array?</p>
+    <label><input type="radio" name="q5" value="a"> O(1)</label><br>
+    <label><input type="radio" name="q5" value="b"> O(n)</label><br>
+    <label><input type="radio" name="q5" value="c"> O(log n)</label><br>
+    
+    <p>6. Which method is used to add elements to the beginning of an array?</p>
+    <label><input type="radio" name="q6" value="a"> addStart()</label><br>
+    <label><input type="radio" name="q6" value="b"> unshift()</label><br>
+    <label><input type="radio" name="q6" value="c"> prepend()</label><br>
+    
+    <p>7. What does the <code>array.length</code> property return?</p>
+    <label><input type="radio" name="q7" value="a"> The number of elements in the array</label><br>
+    <label><input type="radio" name="q7" value="b"> The maximum capacity of the array</label><br>
+    <label><input type="radio" name="q7" value="c"> The index of the last element in the array</label><br>
+    
+    <p>8. Which method is used to remove the first element from an array?</p>
+    <label><input type="radio" name="q8" value="a"> shift()</label><br>
+    <label><input type="radio" name="q8" value="b"> removeStart()</label><br>
+    <label><input type="radio" name="q8" value="c"> pop()</label><br>
+    
+    <p>9. What is the result of the following code: <code>['apple', 'banana', 'cherry'].indexOf('banana')</code>?</p>
+    <label><input type="radio" name="q9" value="a"> 0</label><br>
+    <label><input type="radio" name="q9" value="b"> 1</label><br>
+    <label><input type="radio" name="q9" value="c"> 2</label><br>
+    
+    <p>10. Which method is used to join all elements of an array into a string?</p>
+    <label><input type="radio" name="q10" value="a"> join()</label><br>
+    <label><input type="radio" name="q10" value="b"> toString()</label><br>
+    <label><input type="radio" name="q10" value="c"> concat()</label><br>
+  </form>
+  <button onclick="checkAnswers()">Check Answers</button>
+  <p id="quizResult"></p>
+</section>
+
+
+<script>
+  function addElement() {
+    var newArrayElement = document.createElement('div');
+    newArrayElement.className = 'node';
+    newArrayElement.innerHTML = document.querySelectorAll('.node').length + 1;
+    document.querySelector('.array').appendChild(newArrayElement);
+    updateArraySize();
+  }
+
+  function removeElement() {
+    var nodes = document.querySelectorAll('.node');
+    if (nodes.length > 0) {
+      var lastNode = nodes[nodes.length - 1];
+      lastNode.style.opacity = 0;
+      setTimeout(function () {
+        lastNode.remove();
+        updateArraySize();
+      }, 500);
+    }
+  }
+
+  function clearArray() {
+    var array = document.querySelector('.array');
+    array.innerHTML = '';
+    updateArraySize();
+  }
+
+  function updateArraySize() {
+    var sizeElement = document.getElementById('arraySize');
+    var arraySize = document.querySelectorAll('.node').length;
+    sizeElement.textContent = 'Size: ' + arraySize;
+  }
+
+  function checkAnswers() {
+    const answers = {
+      'q1': 'c',
+      'q2': 'b',
+      'q3': 'b', // Change the correct answers for each question accordingly
+      'q4': 'a',
+      'q5': 'c',
+      'q6': 'a',
+      'q7': 'c',
+      'q8': 'b',
+      'q9': 'a',
+      'q10': 'b'
+    };
+    const quizResult = document.getElementById('quizResult');
+    const form = document.getElementById('quizForm');
+    let correctCount = 0;
+    for (let q in answers) {
+      const selectedAnswer = form.querySelector('input[name="' + q + '"]:checked');
+      if (selectedAnswer && selectedAnswer.value === answers[q]) {
+        correctCount++;
+      }
+    }
+    quizResult.textContent = 'You got ' + correctCount + ' out of ' + Object.keys(answers).length + ' correct.';
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Animation Website</title>
+    <style>
+        /* Resetting default margin and padding */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #e09812;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s ease; /* Transition effect on link color */
+        }
+
+        nav ul li a:hover {
+            color: #1b1a15; /* Change color on hover */
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .hero h2 {
+            font-size: 2.5em;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .animation-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(230, 152, 9, 0.1);
+            flex: 0 0 31%;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease; /* Add transition effect */
+        }
+
+        .animation-card:hover {
+            transform: translateY(-5px); /* Move the card up on hover */
+        }
+
+        .animation-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .animation-card p {
+            margin-bottom: 20px;
+        }
+
+        .animation-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #e09812;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #991b1b;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #e09812;
+            color: #fff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>DSA Animation</h1>
+        <nav>
+            <ul>
+                
+                <li><a href="app.html">Applications</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero">
+            <h2>Welcome to DSA Animation</h2>
+            <p>Explore interactive animations of various data structures and algorithms.</p>
+            <a href="second.html" class="btn">Get Started</a>
+        </section>
+        
+        <section class="features">
+            <div class="animation-card">
+                <h3>Array</h3>
+                <img src="ar.png" alt="Array Animation">
+                <p>Visualize array operations and algorithms</p>
+
+                <a href="array.html" class="btn">View Animation</a>
+            </div>
+
+            <div class="animation-card">
+                <h3>Linked List</h3>
+                <img src="ll.png" alt="Linked List Animation">
+                <p>Learn about linked lists and their operations through an interactive animation.</p>
+                <a href="linked list.html" class="btn">View Animation</a>
+            </div>
+            
+            <div class="animation-card">
+                <h3>Queue</h3>
+                <img src="queu.png" alt="Queue Animation">
+                <p>Visualize Queue operations and algorithms.</p>
+                <a href="queue.html" class="btn">View Animation</a>
+            </div>
+
+            <div class="animation-card">
+                <h3>Stack</h3>
+                <img src="stack.png" alt="Stack Animation">
+                <p>Interactive animation demonstrating stack operations and algorithms.</p>
+                <a href="stack.html" class="btn">View Animation</a>
+            </div>
+
+           
+
+            <div class="animation-card">
+                <h3>Graph</h3>
+                <img src="graph.png" alt="Graph Animation">
+                <p>Explore graph algorithms and traversal techniques with our interactive animation.</p>
+                <a href="graphs.html" class="btn">View Animation</a>
+            </div>
+
+            <div class="animation-card">
+                <h3>Tree</h3>
+                <img src="tree.png" alt="Tree Animation">
+                <p>Visualize tree data structures and algorithms in action.</p>
+                <a href="tree.html" class="btn">View Animation</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 DSA Animation. All rights reserved.</p>
+    </footer>
+</body>
+</html>

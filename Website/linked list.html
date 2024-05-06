@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linked List Operations</title>
+<style>
+  body {
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+  }
+
+  h1, h2 {
+    color: #333;
+  }
+
+  .linked-list {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+    position: relative;
+  }
+
+  .node {
+    border: 2px solid #fff;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s ease;
+    background-color: #ff6666;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+  }
+
+  .arrow {
+    position: absolute;
+    z-index: 0;
+  }
+
+  .arrow-line {
+    width: 100px;
+    height: 2px;
+    background-color: #333;
+    top: 50%;
+    left: 100%;
+    transform-origin: left center;
+  }
+
+  .arrow-triangle {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 10px solid #333;
+    top: calc(50% - 6px);
+    left: calc(100% - 10px);
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #45a049;
+  }
+
+  #linkedListSize {
+    margin-top: 20px;
+    color: #666;
+  }
+
+  #description {
+    margin-top: 30px;
+    color: #666;
+  }
+
+  input[type="number"],
+  input[type="text"] {
+    margin-right: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+
+  .quiz {
+    margin-top: 50px;
+  }
+
+  .quiz form p {
+    margin-bottom: 10px;
+  }
+
+  .quiz button {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Linked List Operations</h1>
+
+<h2>Description:</h2>
+<p id="description">Definition:
+  A linked list is a data structure consisting of a collection of nodes, where each node contains a data element and a reference (or pointer) to the next node in the sequence. The first node is called the head, and the last node typically points to null, indicating the end of the list. Linked lists offer flexibility in memory management and are commonly used for dynamic data storage.</p>
+<p>A linked list is a linear data structure where elements, called nodes, are stored in memory non-contiguously. Each node contains data and a reference (or pointer) to the next node in the sequence. Linked lists provide dynamic memory allocation and efficient insertion and deletion operations.</p>
+
+<div class="linked-list" id="linkedList">
+  <div class="node" id="node1">1</div>
+  <div class="node" id="node2">2</div>
+  <div class="node" id="node3">3</div>
+  <div class="arrow" id="arrow1">
+    <div class="arrow-line"></div>
+    <div class="arrow-triangle"></div>
+  </div>
+  <div class="arrow" id="arrow2">
+    <div class="arrow-line"></div>
+    <div class="arrow-triangle"></div>
+  </div>
+</div>
+
+<div id="linkedListSize">Size: 3</div>
+
+<div id="insertNodeForm">
+  <label for="position">Position:</label>
+  <input type="number" id="position" min="1">
+  <label for="value">Value:</label>
+  <input type="text" id="value">
+  <button onclick="addNode()">Add Node</button>
+</div>
+
+<div id="deleteNodeForm">
+  <label for="deletePosition">Position:</label>
+  <input type="number" id="deletePosition" min="1">
+  <button onclick="removeNode()">Remove Node</button>
+</div>
+
+<button onclick="clearList()">Reset</button>
+
+<h2>YouTube Video:</h2>
+<div>
+  <!-- Replace 'VIDEO_ID_HERE' with the actual YouTube video ID -->
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/mKOHEZ17PnY" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<section class="quiz">
+  <h2>Quiz</h2>
+  <form id="quizForm">
+    <p>1. What is the time complexity of adding a node at the beginning of a linked list?</p>
+    <label><input type="radio" name="q1" value="a"> O(1)</label><br>
+    <label><input type="radio" name="q1" value="b"> O(n)</label><br>
+    <label><input type="radio" name="q1" value="c"> O(log n)</label><br>
+    
+    <p>2. How do you remove a node from a linked list?</p>
+    <label><input type="radio" name="q2" value="a"> Using a pop method</label><br>
+    <label><input type="radio" name="q2" value="b"> By setting the node's value to null</label><br>
+    <label><input type="radio" name="q2" value="c"> By adjusting pointers to skip the node</label><br>
+    
+    <p>3. What is the time complexity of removing a node from the middle of a singly linked list?</p>
+    <label><input type="radio" name="q3" value="a"> O(1)</label><br>
+    <label><input type="radio" name="q3" value="b"> O(n)</label><br>
+    <label><input type="radio" name="q3" value="c"> O(log n)</label><br>
+    
+    <p>4. Which data structure is used to implement a linked list?</p>
+    <label><input type="radio" name="q4" value="a"> Array</label><br>
+    <label><input type="radio" name="q4" value="b"> Stack</label><br>
+    <label><input type="radio" name="q4" value="c"> Nodes</label><br>
+    
+    <p>5. What is the space complexity of a linked list?</p>
+    <label><input type="radio" name="q5" value="a"> O(1)</label><br>
+    <label><input type="radio" name="q5" value="b"> O(n)</label><br>
+    <label><input type="radio" name="q5" value="c"> O(n^2)</label><br>
+    
+    <p>6. Which operation is used to traverse a linked list?</p>
+    <label><input type="radio" name="q6" value="a"> Push</label><br>
+    <label><input type="radio" name="q6" value="b"> Pop</label><br>
+    <label><input type="radio" name="q6" value="c"> Iterate</label><br>
+    
+    <p>7. What is the main advantage of a doubly linked list over a singly linked list?</p>
+    <label><input type="radio" name="q7" value="a"> Better memory utilization</label><br>
+    <label><input type="radio" name="q7" value="b"> Easier implementation</label><br>
+    <label><input type="radio" name="q7" value="c"> Bidirectional traversal</label><br>
+    
+    <p>8. Which pointer in a doubly linked list points to the previous node?</p>
+    <label><input type="radio" name="q8" value="a"> Next pointer</label><br>
+    <label><input type="radio" name="q8" value="b"> Prev pointer</label><br>
+    <label><input type="radio" name="q8" value="c"> Data pointer</label><br>
+    
+    <p>9. What happens when you attempt to access a null pointer in a linked list?</p>
+    <label><input type="radio" name="q9" value="a"> The program crashes</label><br>
+    <label><input type="radio" name="q9" value="b"> It returns a random value</label><br>
+    <label><input type="radio" name="q9" value="c"> It returns an error</label><br>
+    
+    <p>10. Which operation is used to add a node at the end of a linked list?</p>
+    <label><input type="radio" name="q10" value="a"> Insert</label><br>
+    <label><input type="radio" name="q10" value="b"> Append</label><br>
+    <label><input type="radio" name="q10" value="c"> Push</label><br>
+  </form>
+  <button onclick="checkAnswers()">Check Answers</button>
+  <p id="quizResult"></p>
+</section>
+
+<script>
+  function addNode() {
+    var position = document.getElementById('position').value;
+    var value = document.getElementById('value').value;
+    var newNode = document.createElement('div');
+    newNode.className = 'node';
+    newNode.innerHTML = value;
+    var nodes = document.querySelectorAll('.node');
+    var arrows = document.querySelectorAll('.arrow');
+    if (position >= 1 && position <= nodes.length + 1) {
+      if (position === 1) {
+        document.querySelector('.linked-list').prepend(newNode);
+        document.querySelector('.linked-list').prepend(arrows[0].cloneNode(true));
+      } else {
+        var referenceNode = nodes[position - 2];
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        referenceNode.parentNode.insertBefore(arrows[position - 1].cloneNode(true), referenceNode.nextSibling);
+      }
+      updateListSize();
+    } else {
+      alert("Invalid position!");
+    }
+  }
+
+  function removeNode() {
+    var position = document.getElementById('deletePosition').value;
+    var nodes = document.querySelectorAll('.node');
+    var arrows = document.querySelectorAll('.arrow');
+    if (position >= 1 && position <= nodes.length) {
+      var nodeToRemove = nodes[position - 1];
+      var arrowToRemove = arrows[position - 1];
+      nodeToRemove.style.opacity = 0;
+      arrowToRemove.style.opacity = 0;
+      setTimeout(function () {
+        nodeToRemove.remove();
+        arrowToRemove.remove();
+        updateListSize();
+      }, 500);
+    } else {
+      alert("Invalid position!");
+    }
+  }
+
+  function clearList() {
+    var list = document.querySelector('.linked-list');
+    list.innerHTML = '<div class="node" id="node1">1</div><div class="node" id="node2">2</div><div class="node" id="node3">3</div><div class="arrow" id="arrow1"><div class="arrow-line"></div><div class="arrow-triangle"></div></div><div class="arrow" id="arrow2"><div class="arrow-line"></div><div class="arrow-triangle"></div></div>';
+    updateListSize();
+  }
+
+  function updateListSize() {
+    var sizeElement = document.getElementById('linkedListSize');
+    var listSize = document.querySelectorAll('.node').length;
+    sizeElement.textContent = 'Size: ' + listSize;
+  }
+
+  function checkAnswers() {
+    const answers = {
+      'q1': 'a',
+      'q2': 'c',
+      'q3': 'b',
+      'q4': 'a',
+      'q5': 'b',
+      'q6': 'c',
+      'q7': 'c',
+      'q8': 'b',
+      'q9': 'a',
+      'q10': 'b'
+    };
+    const quizResult = document.getElementById('quizResult');
+    const form = document.getElementById('quizForm');
+    let correctCount = 0;
+    for (let q in answers) {
+      const selectedAnswer = form.querySelector('input[name="' + q + '"]:checked');
+      if (selectedAnswer && selectedAnswer.value === answers[q]) {
+        correctCount++;
+      }
+    }
+    quizResult.textContent = 'You got ' + correctCount + ' out of ' + Object.keys(answers).length + ' correct.';
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graph Operations</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  .graph {
+    position: relative;
+  }
+  .node {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 2px solid #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .edge {
+    position: absolute;
+    background-color: #333;
+    height: 2px;
+    transform-origin: left center;
+    transition: width 0.5s ease, transform 0.5s ease;
+  }
+  button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+</style>
+</head>
+<body>
+
+<h1>Graph Operations</h1>
+<p>This is a simple demonstration of graph operations using HTML, CSS, and JavaScript.</p>
+
+<div class="graph" id="graph">
+  <div class="node" id="node1" style="left: 50px; top: 50px;">A</div>
+  <div class="node" id="node2" style="left: 200px; top: 100px;">B</div>
+  <div class="node" id="node3" style="left: 350px; top: 50px;">C</div>
+  <div class="node" id="node4" style="left: 500px; top: 100px;">D</div>
+</div>
+
+<button onclick="addEdge('node1', 'node2')">Add Edge (A, B)</button>
+<button onclick="addEdge('node2', 'node3')">Add Edge (B, C)</button>
+<button onclick="addEdge('node3', 'node4')">Add Edge (C, D)</button>
+<button onclick="removeEdge('node1', 'node2')">Remove Edge (A, B)</button>
+<button onclick="removeEdge('node2', 'node3')">Remove Edge (B, C)</button>
+<button onclick="removeEdge('node3', 'node4')">Remove Edge (C, D)</button>
+
+<script>
+  function addEdge(nodeId1, nodeId2) {
+    const node1 = document.getElementById(nodeId1);
+    const node2 = document.getElementById(nodeId2);
+    
+    const edge = document.createElement('div');
+    edge.className = 'edge';
+    
+    const x1 = node1.offsetLeft + node1.offsetWidth / 2;
+    const y1 = node1.offsetTop + node1.offsetHeight / 2;
+    const x2 = node2.offsetLeft + node2.offsetWidth / 2;
+    const y2 = node2.offsetTop + node2.offsetHeight / 2;
+    
+    const length = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+    
+    edge.style.width = length + 'px';
+    edge.style.left = x1 + 'px';
+    edge.style.top = y1 + 'px';
+    edge.style.transform = 'rotate(' + angle + 'deg)';
+    
+    document.getElementById('graph').appendChild(edge);
+  }
+
+  function removeEdge(nodeId1, nodeId2) {
+    const edges = document.querySelectorAll('.edge');
+    const node1 = document.getElementById(nodeId1);
+    const node2 = document.getElementById(nodeId2);
+    
+    edges.forEach(edge => {
+      const edgeNode1 = edge.style.left + ',' + edge.style.top;
+      const edgeNode2 = node1.offsetLeft + node1.offsetWidth / 2 + ',' + (node1.offsetTop + node1.offsetHeight / 2);
+      const edgeNode3 = node2.offsetLeft + node2.offsetWidth / 2 + ',' + (node2.offsetTop + node2.offsetHeight / 2);
+      if (
+        edgeNode1 === edgeNode2 || edgeNode1 === edgeNode3 ||
+        edgeNode1 === edgeNode3 || edgeNode1 === edgeNode2
+      ) {
+        edge.remove();
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

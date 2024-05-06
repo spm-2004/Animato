@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Graph Operations</title>
+<style>
+  .stack {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+  }
+  .node {
+    border: 2px solid #333;
+    border-radius: 5px;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.5s ease;
+    background-color: #fff;
+    color: #333;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  .arrow {
+    width: 2px;
+    height: 50px;
+    background-color: #333;
+    position: absolute;
+    top: calc(100% + 20px);
+    left: 50%;
+    transition: all 0.5s ease;
+  }
+  button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background-color: #45a049;
+  }
+  #peekedElement, #isEmpty {
+    display: none;
+    margin-top: 20px;
+  }
+  #videoContainer {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Graph </h1>
+<p>A graph is a data structure consisting of a set of vertices (nodes) connected by edges. It's used to represent relationships between pairs of objects. Graphs can be directed or undirected, and they may have weighted or unweighted edges. Common operations include adding and removing vertices and edges, traversing the graph, and finding paths between vertices.</p>
+
+
+<div id="videoContainer">
+  <h2>Graph Overview Video</h2>
+  <!-- Replace 'VIDEO_ID' with the actual ID of your YouTube video -->
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/KXnJQUzZ9iI?si=OUzx6nbbfJL_R1Tq" frameborder="0" allowfullscreen></iframe>
+</div>
+<section class="quiz">
+      <h2>Quiz</h2>
+      <form id="quizForm">
+        <p>1. What is a graph in data structures?</p>
+        <label><input type="radio" name="q1" value="a"> A linear data structure</label><br>
+        <label><input type="radio" name="q1" value="b"> A hierarchical data structure</label><br>
+        <label><input type="radio" name="q1" value="c"> A non-linear data structure</label><br>
+
+        <p>2. Which of the following is NOT a basic component of a graph?</p>
+        <label><input type="radio" name="q2" value="a"> Vertex</label><br>
+        <label><input type="radio" name="q2" value="b"> Edge</label><br>
+        <label><input type="radio" name="q2" value="c"> Pointer</label><br>
+
+        <p>3. What does a vertex represent in a graph?</p>
+        <label><input type="radio" name="q3" value="a"> A connection between two nodes</label><br>
+        <label><input type="radio" name="q3" value="b"> A node or entity</label><br>
+        <label><input type="radio" name="q3" value="c"> An edge</label><br>
+
+        <p>4. What does an edge represent in a graph?</p>
+        <label><input type="radio" name="q4" value="a"> A weight</label><br>
+        <label><input type="radio" name="q4" value="b"> A path between two vertices</label><br>
+        <label><input type="radio" name="q4" value="c"> A connection between two vertices</label><br>
+
+        <p>5. Which type of graph has edges with a direction?</p>
+        <label><input type="radio" name="q5" value="a"> Directed graph</label><br>
+        <label><input type="radio" name="q5" value="b"> Undirected graph</label><br>
+        <label><input type="radio" name="q5" value="c"> Bipartite graph</label><br>
+
+        <p>6. What is the degree of a vertex in a graph?</p>
+        <label><input type="radio" name="q6" value="a"> The number of vertices adjacent to it</label><br>
+        <label><input type="radio" name="q6" value="b"> The weight of the edges connected to it</label><br>
+        <label><input type="radio" name="q6" value="c"> The length of the shortest path from it to another vertex</label><br>
+
+        <p>7. Which of the following is a graph traversal algorithm?</p>
+        <label><input type="radio" name="q7" value="a"> Depth-First Search (DFS)</label><br>
+        <label><input type="radio" name="q7" value="b"> Bubble Sort</label><br>
+        <label><input type="radio" name="q7" value="c"> Binary Search</label><br>
+
+        <p>8. Which algorithm is used to find the shortest path in a graph?</p>
+        <label><input type="radio" name="q8" value="a"> Breadth-First Search (BFS)</label><br>
+        <label><input type="radio" name="q8" value="b"> Depth-First Search (DFS)</label><br>
+        <label><input type="radio" name="q8" value="c"> Dijkstra's algorithm</label><br>
+
+        <p>9. Which of the following is NOT a type of graph representation?</p>
+        <label><input type="radio" name="q9" value="a"> Adjacency Matrix</label><br>
+        <label><input type="radio" name="q9" value="b"> Adjacency List</label><br>
+        <label><input type="radio" name="q9" value="c"> Tree</label><br>
+
+        <p>10. Which of the following is NOT a graph traversal algorithm?</p>
+        <label><input type="radio" name="q10" value="a"> Depth-First Search (DFS)</label><br>
+        <label><input type="radio" name="q10" value="b"> Breadth-First Search (BFS)</label><br>
+        <label><input type="radio" name="q10" value="c"> Quick Sort</label><br>
+      </form>
+      <button onclick="checkGraphAnswers()">Check Answers</button>
+      <p id="graphQuizResult"></p>
+    </section>
+  </section>
+</main>
+
+
+
+<script>
+  function pushElement() {
+    var newNode = document.createElement('div');
+    newNode.className = 'node';
+    newNode.innerHTML = document.querySelectorAll('.node').length + 1;
+    newNode.style.backgroundColor = getRandomColor();
+    document.querySelector('.stack').appendChild(newNode);
+    updateStackSize();
+  }
+
+  function popElement() {
+    var nodes = document.querySelectorAll('.node');
+    if (nodes.length > 0) {
+      var lastNode = nodes[nodes.length - 1];
+      lastNode.style.opacity = 0;
+      setTimeout(function () {
+        lastNode.remove();
+        updateStackSize();
+      }, 500);
+    }
+  }
+
+  function peekElement() {
+    var nodes = document.querySelectorAll('.node');
+    if (nodes.length > 0) {
+      var topNode = nodes[nodes.length - 1];
+      document.getElementById('peekedElement').style.display = 'block';
+      document.getElementById('peekedElement').textContent = 'Peeked Element: ' + topNode.textContent;
+    } else {
+      document.getElementById('peekedElement').style.display = 'block';
+      document.getElementById('peekedElement').textContent = 'Peeked Element: -';
+    }
+  }
+
+  function clearStack() {
+    var stack = document.querySelector('.stack');
+    stack.innerHTML = '';
+    updateStackSize();
+    hideStatus();
+  }
+
+  function isEmpty() {
+    var nodes = document.querySelectorAll('.node');
+    if (nodes.length === 0) {
+      document.getElementById('isEmpty').style.display = 'block';
+      document.getElementById('isEmpty').textContent = 'Stack is empty.';
+    } else {
+      document.getElementById('isEmpty').style.display = 'block';
+      document.getElementById('isEmpty').textContent = 'Stack is not empty.';
+    }
+  }
+
+  function updateStackSize() {
+    var sizeElement = document.getElementById('stackSize');
+    var stackSize = document.querySelectorAll('.node').length;
+    sizeElement.textContent = 'Size: ' + stackSize;
+  }
+
+  function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  function hideStatus() {
+    document.getElementById('peekedElement').style.display = 'none';
+    document.getElementById('isEmpty').style.display = 'none';
+  }
+  function checkGraphAnswers() {
+    const answers = {
+      'q1': 'c',
+      'q2': 'c',
+      'q3': 'b',
+      'q4': 'c',
+      'q5': 'a',
+      'q6': 'a',
+      'q7': 'a',
+      'q8': 'c',
+      'q9': 'c',
+      'q10': 'c'
+    };
+    const quizResult = document.getElementById('graphQuizResult');
+    const form = document.getElementById('quizForm');
+    let correctCount = 0;
+    for (let q in answers) {
+      const selectedAnswer = form.querySelector('input[name="' + q + '"]:checked');
+      if (selectedAnswer && selectedAnswer.value === answers[q]) {
+        correctCount++;
+      }
+    }
+    quizResult.textContent = 'You got ' + correctCount + ' out of ' + Object.keys(answers).length + ' correct.';
+  }
+</script>
+
+</body>
+</html>

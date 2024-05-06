@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dictionary Visualization</title>
+<style>
+    /* Styles for the code display */
+    pre {
+        background-color: #f4f4f4;
+        padding: 20px;
+        border-radius: 5px;
+        overflow-x: auto;
+    }
+
+    /* Styles for the dictionary visualization */
+    table {
+        border-collapse: collapse;
+        width: 50%;
+        margin: 20px auto;
+    }
+
+    th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+
+    input[type="text"] {
+        padding: 5px;
+        margin-right: 10px;
+    }
+
+    button {
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+
+<h2>C++ Code</h2>
+
+<pre>
+#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+#include &lt;string&gt;
+
+std::unordered_map&lt;std::string, std::string&gt; dictionary;
+
+void insert(const std::string&amp; key, const std::string&amp; value) {
+    dictionary[key] = value;
+}
+
+const std::string&amp; find(const std::string&amp; key) {
+    auto it = dictionary.find(key);
+    if (it != dictionary.end()) {
+        return it-&gt;second;
+    } else {
+        static const std::string notFound = "Key not found";
+        return notFound;
+    }
+}
+
+void remove(const std::string&amp; key) {
+    dictionary.erase(key);
+}
+</pre>
+
+<h2>Dictionary Visualization</h2>
+
+<table id="dictionary">
+    <tr>
+        <th>Key</th>
+        <th>Value</th>
+    </tr>
+</table>
+
+<div>
+    <input type="text" id="keyInput" placeholder="Enter key">
+    <input type="text" id="valueInput" placeholder="Enter value">
+    <button onclick="insert()">Insert</button>
+    <button onclick="find()">Find</button>
+    <button onclick="remove()">Delete</button>
+</div>
+
+<script>
+    const dictionary = {};
+
+    function insert() {
+        const key = document.getElementById("keyInput").value;
+        const value = document.getElementById("valueInput").value;
+        
+        if (key && value) {
+            dictionary[key] = value;
+            updateTable();
+        } else {
+            alert("Please enter both key and value.");
+        }
+    }
+
+    function find() {
+        const key = document.getElementById("keyInput").value;
+        
+        if (key && dictionary.hasOwnProperty(key)) {
+            alert("Value: " + dictionary[key]);
+        } else {
+            alert("Key not found.");
+        }
+    }
+
+    function remove() {
+        const key = document.getElementById("keyInput").value;
+        
+        if (key && dictionary.hasOwnProperty(key)) {
+            delete dictionary[key];
+            updateTable();
+            alert("Key deleted successfully.");
+        } else {
+            alert("Key not found.");
+        }
+    }
+
+    function updateTable() {
+        const table = document.getElementById("dictionary");
+        table.innerHTML = "<tr><th>Key</th><th>Value</th></tr>";
+
+        for (const key in dictionary) {
+            const row = `<tr><td>${key}</td><td>${dictionary[key]}</td></tr>`;
+            table.innerHTML += row;
+        }
+    }
+</script>
+
+</body>
+</html>

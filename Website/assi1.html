@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flight Management System</title>
+  <link rel="stylesheet" href="assi1.css">
+  <style>
+    pre {
+      background-color: #f4f4f4;
+      padding: 10px;
+      border: 1px solid #ccc;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h2>C++ Code for Flight Management System</h2>
+  <pre>
+    <code class="cpp">
+      #include &lt;iostream&gt;
+      #include &lt;vector&gt;
+      #include &lt;map&gt;
+      #include &lt;string&gt;
+
+      using namespace std;
+
+      // Function to display the adjacency matrix
+      void displayAdjacencyMatrix(const vector&lt;vector&lt;int&gt;&gt;& adjacencyMatrix, const vector&lt;string&gt;& cities) {
+          cout &lt;&lt; "Adjacency Matrix:" &lt;&lt; endl;
+          cout &lt;&lt; "   ";
+          for (const string&amp; city : cities) {
+              cout &lt;&lt; city &lt;&lt; "\t";
+          }
+          cout &lt;&lt; endl;
+          for (int i = 0; i &lt; adjacencyMatrix.size(); ++i) {
+              cout &lt;&lt; cities[i] &lt;&lt; " ";
+              for (int j = 0; j &lt; adjacencyMatrix[i].size(); ++j) {
+                  cout &lt;&lt; adjacencyMatrix[i][j] &lt;&lt; "\t";
+              }
+              cout &lt;&lt; endl;
+          }
+      }
+
+      // Function to display the adjacency list
+      void displayAdjacencyList(const map&lt;string, vector&lt;pair&lt;string, int&gt;&gt;&gt;& adjacencyList) {
+          cout &lt;&lt; "Adjacency List:" &lt;&lt; endl;
+          for (const auto&amp; entry : adjacencyList) {
+              cout &lt;&lt; entry.first &lt;&lt; ": ";
+              for (const auto&amp; neighbor : entry.second) {
+                  cout &lt;&lt; neighbor.first &lt;&lt; " (" &lt;&lt; neighbor.second &lt;&lt; ") ";
+              }
+              cout &lt;&lt; endl;
+          }
+      }
+
+      // Function to check if two cities are connected
+      bool isConnected(const vector&lt;vector&lt;int&gt;&gt;& adjacencyMatrix, const string&amp; city1, const string&amp; city2, const vector&lt;string&gt;& cities) {
+          int index1 = -1, index2 = -1;
+          for (int i = 0; i &lt; cities.size(); ++i) {
+              if (cities[i] == city1) index1 = i;
+              if (cities[i] == city2) index2 = i;
+          }
+          if (index1 == -1 || index2 == -1) return false;
+          return adjacencyMatrix[index1][index2] != 0;
+      }
+
+      int main() {
+          // Define cities
+          vector&lt;string&gt; cities = {"New York", "London", "Paris", "Rome"};
+
+          // Define adjacency matrix
+          vector&lt;vector&lt;int&gt;&gt; adjacencyMatrix(cities.size(), vector&lt;int&gt;(cities.size(), 0));
+
+          // Define adjacency list
+          map&lt;string, vector&lt;pair&lt;string, int&gt;&gt;&gt; adjacencyList;
+
+          // Add flights between cities
+          adjacencyMatrix[0][1] = 7; // New York -&gt; London
+          adjacencyMatrix[0][2] = 9; // New York -&gt; Paris
+          adjacencyMatrix[1][2] = 3; // London -&gt; Paris
+          adjacencyMatrix[2][3] = 5; // Paris -&gt; Rome
+
+          adjacencyList["New York"].push_back({"London", 7});
+          adjacencyList["New York"].push_back({"Paris", 9});
+          adjacencyList["London"].push_back({"Paris", 3});
+          adjacencyList["Paris"].push_back({"Rome", 5});
+
+          // Display adjacency matrix
+          displayAdjacencyMatrix(adjacencyMatrix, cities);
+
+          // Display adjacency list
+          displayAdjacencyList(adjacencyList);
+
+          // Check connection between cities
+          string city1, city2;
+          cout &lt;&lt; "Enter the first city: ";
+          getline(cin, city1);
+          cout &lt;&lt; "Enter the second city: ";
+          getline(cin, city2);
+          if (isConnected(adjacencyMatrix, city1, city2, cities)) {
+              cout &lt;&lt; city1 &lt;&lt; " and " &lt;&lt; city2 &lt;&lt; " are connected through flight." &lt;&lt; endl;
+          } else {
+              cout &lt;&lt; city1 &lt;&lt; " and " &lt;&lt; city2 &lt;&lt; " are not connected through flight." &lt;&lt; endl;
+          }
+
+          return 0;
+      }
+    </code>
+  </pre>
+</head>
+<body>
+  <div id="container">
+    <canvas id="canvas" width="600" height="400"></canvas>
+  </div>
+  <div id="output"></div>
+  <div id="menu">
+    <button onclick="displayAdjacencyMatrix()">Display Adjacency Matrix</button>
+    <button onclick="displayAdjacencyList()">Display Adjacency List</button>
+    <button onclick="checkConnection()">Check Connection</button>
+  </div>
+  <script src="assi1.js"></script>
+</body>
+</html>
